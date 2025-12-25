@@ -8,7 +8,12 @@ import useHapticFeedback from '../hooks/useHapticFeedback.js';
 const MobileFAB = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const { setShowTransactionModal, setTransactionModalType, setShowTransferModal } = useAppContext();
+  const appContext = useAppContext();
+  const {
+    setShowTransactionModal = () => {},
+    setTransactionModalType = () => {},
+    setShowTransferModal = () => {}
+  } = appContext || {};
   const { triggerHapticFeedback } = useHapticFeedback();
 
   // Show FAB on key pages: wallet, analysis, and transactions (NOT on home page '/')

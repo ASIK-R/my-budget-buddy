@@ -8,10 +8,17 @@ import { useAppContext } from '../context/AppContext';
 import { Search, Bell, User, Menu, X, MoreHorizontal } from 'lucide-react';
 import useHapticFeedback from '../hooks/useHapticFeedback';
 
+/**
+ * @param {{ children: React.ReactNode, hideHeaderAndSidebar?: boolean }} props
+ */
 const Layout = memo(({ children, hideHeaderAndSidebar = false }) => {
   const location = useLocation();
   const navigate = useNavigate();
-  const { isAuthenticated, isMobile } = useAppContext();
+  const appContext = useAppContext();
+  const {
+    isAuthenticated = false,
+    isMobile = false
+  } = appContext || {};
   const { triggerHapticFeedback } = useHapticFeedback();
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [sidebarMinimized, setSidebarMinimized] = useState(false);

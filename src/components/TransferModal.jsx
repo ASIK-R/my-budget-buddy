@@ -4,7 +4,13 @@ import { X, TrendingUp, RefreshCw, ArrowDownRight } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const TransferModal = () => {
-  const { showTransferModal, setShowTransferModal, accounts, transferBetweenWallets } = useAppContext();
+  const appContext = useAppContext();
+  const {
+    showTransferModal = false,
+    setShowTransferModal = () => {},
+    accounts = [],
+    transferBetweenWallets = async () => {}
+  } = appContext || {};
   const [transferData, setTransferData] = useState({
     fromWallet: '',
     toWallet: '',
@@ -63,7 +69,8 @@ const TransferModal = () => {
       // Close modal
       setShowTransferModal(false);
     } catch (error) {
-      setErrors({ general: error.message || 'Failed to transfer money. Please try again.' });
+      const errorMessage = error instanceof Error ? error.message : 'Failed to transfer money. Please try again.';
+      setErrors({ general: errorMessage });
     } finally {
       setIsTransferring(false);
     }

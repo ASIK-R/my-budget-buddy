@@ -39,13 +39,28 @@ const SimpleFallback = memo(() => (
   </div>
 ));
 
+/**
+ * @param {{ children: React.ReactNode }} props
+ */
 const LazyPageWrapper = memo(({ children }) => (
   <Suspense fallback={<SimpleFallback />}>{children}</Suspense>
 ));
 
-// Protected route component - minimal check
+/**
+ * @param {{ children: React.ReactNode }} props
+ */
 const ProtectedRoute = memo(({ children }) => {
-  const { user, appInitialized, fetchAccounts, fetchTransactions, fetchBudgets, fetchCategories } = useAppContext();
+  const appContext = useAppContext();
+
+  // Destructure safely with fallback to empty object if context is null
+  const {
+    user = null,
+    appInitialized = false,
+    fetchAccounts = () => {},
+    fetchTransactions = () => {},
+    fetchBudgets = () => {},
+    fetchCategories = () => {}
+  } = appContext || {};
 
   // Fetch data when app initializes
   useEffect(() => {

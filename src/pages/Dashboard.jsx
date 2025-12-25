@@ -10,7 +10,18 @@ import useHapticFeedback from '../hooks/useHapticFeedback.js';
 
 const Dashboard = () => {
   const navigate = useNavigate();
-  const { accounts, transactions, budgets, isSyncing, syncAllData, appInitialized, error, clearError, isOnline } = useAppContext();
+  const appContext = useAppContext();
+  const {
+    accounts = [],
+    transactions = [],
+    budgets = [],
+    isSyncing = false,
+    syncAllData = async () => {},
+    appInitialized = false,
+    error = null,
+    clearError = () => {},
+    isOnline = true
+  } = appContext || {};
   const { triggerHapticFeedback } = useHapticFeedback();
   
   const [showTransactionModal, setShowTransactionModal] = useState(false);
@@ -47,7 +58,7 @@ const Dashboard = () => {
   // Recent transactions
   const recentTransactions = useMemo(() => {
     return [...(transactions || [])]
-      .sort((a, b) => new Date(b.date) - new Date(a.date))
+      .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
       .slice(0, 4);
   }, [transactions]);
 

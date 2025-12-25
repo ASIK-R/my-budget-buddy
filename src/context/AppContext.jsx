@@ -15,7 +15,7 @@ import * as supabaseDB from '../utils/supabaseDB';
 import { mergeDataWithConflictResolution, resolveTransactionConflict, resolveWalletConflict, resolveBudgetConflict } from '../utils/conflictResolution';
 import OfflineQueueManager from '../utils/offlineQueueManager';
 
-const AppContext = createContext();
+const AppContext = createContext(null);
 
 export const useAppContext = () => useContext(AppContext);
 
@@ -97,10 +97,10 @@ export const AppProvider = ({ children }) => {
     });
 
     return () => {
-      if (typeof subscription === 'function') {
-        subscription();
-      } else if (subscription && typeof subscription.unsubscribe === 'function') {
+      if (subscription && typeof subscription.unsubscribe === 'function') {
         subscription.unsubscribe();
+      } else if (typeof subscription === 'function') {
+        subscription();
       }
     };
   }, []);
@@ -108,7 +108,7 @@ export const AppProvider = ({ children }) => {
   useEffect(() => {
     console.log('User effect triggered:', { user });
     if (user) {
-      console.log('Initializing DB for user:', user.id);
+      console.log('Initializing DB for user:', user?.id || 'local-user');
       initDB().then(() => {
         console.log('DB initialized successfully');
         // Load all data stores separately
@@ -220,7 +220,7 @@ export const AppProvider = ({ children }) => {
           event: '*',
           schema: 'public',
           table: 'wallets',
-          filter: `user_id=eq.${user.id}`
+          filter: `user_id=eq.${user?.id || 'local-user'}`
         },
         (payload) => {
           console.log('Wallet change detected:', payload);
@@ -238,7 +238,7 @@ export const AppProvider = ({ children }) => {
           event: '*',
           schema: 'public',
           table: 'transactions',
-          filter: `user_id=eq.${user.id}`
+          filter: `user_id=eq.${user?.id || 'local-user'}`
         },
         (payload) => {
           console.log('Transaction change detected:', payload);
@@ -256,7 +256,7 @@ export const AppProvider = ({ children }) => {
           event: '*',
           schema: 'public',
           table: 'budgets',
-          filter: `user_id=eq.${user.id}`
+          filter: `user_id=eq.${user?.id || 'local-user'}`
         },
         (payload) => {
           console.log('Budget change detected:', payload);
