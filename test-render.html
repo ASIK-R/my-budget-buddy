@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>App Render Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 2rem;
+            background-color: #f8fafc;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #0ea5e9;
+        }
+        .button {
+            background-color: #0ea5e9;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            font-size: 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 0.5rem;
+        }
+        .button:hover {
+            background-color: #0284c7;
+        }
+        .log {
+            background-color: #1e293b;
+            color: #f8fafc;
+            padding: 1rem;
+            border-radius: 4px;
+            font-family: monospace;
+            white-space: pre-wrap;
+            margin: 1rem 0;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        .iframe-container {
+            width: 100%;
+            height: 500px;
+            border: 1px solid #cbd5e1;
+            border-radius: 4px;
+            margin: 1rem 0;
+            position: relative;
+        }
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+        .spinner {
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top: 4px solid #0ea5e9;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin-bottom: 1rem;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>App Render Test</h1>
+        <p>This page tests if the main app is rendering properly.</p>
+        
+        <button class="button" onclick="testRender()">Test App Render</button>
+        <button class="button" onclick="clearLog()">Clear Log</button>
+        
+        <div class="log" id="log"></div>
+        
+        <h2>App Preview</h2>
+        <div class="iframe-container">
+            <iframe id="appFrame" title="App Preview"></iframe>
+            <div id="frameOverlay" class="overlay">
+                <div class="spinner"></div>
+                <p>Testing app render...</p>
+            </div>
+        </div>
+        
+        <script>
+            const logElement = document.getElementById('log');
+            const frameOverlay = document.getElementById('frameOverlay');
+            
+            function log(message) {
+                const timestamp = new Date().toLocaleTimeString();
+                logElement.innerHTML += `[${timestamp}] ${message}\n`;
+                logElement.scrollTop = logElement.scrollHeight;
+            }
+            
+            function clearLog() {
+                logElement.innerHTML = '';
+            }
+            
+            function testRender() {
+                log('Testing app render...');
+                frameOverlay.style.display = 'flex';
+                
+                const frame = document.getElementById('appFrame');
+                
+                // Add event listeners to monitor frame loading
+                frame.onload = function() {
+                    log('Frame loaded successfully');
+                    try {
+                        // Try to access frame content
+                        const doc = frame.contentDocument || frame.contentWindow.document;
+                        if (doc) {
+                            const body = doc.body;
+                            if (body) {
+                                const textContent = body.innerText || '';
+                                const htmlContent = body.innerHTML || '';
+                                log(`Body text length: ${textContent.length} characters`);
+                                log(`Body HTML length: ${htmlContent.length} characters`);
+                                
+                                // Check if content is rendered
+                                if (htmlContent.includes('Expense Tracker') || htmlContent.includes('Dashboard')) {
+                                    log('App content detected - render successful!', 'success');
+                                } else if (htmlContent.includes('id="root"') && htmlContent.includes('<!-- Empty root')) {
+                                    log('Root element is empty - app may not be rendering', 'warning');
+                                } else {
+                                    log('App content not detected in frame', 'warning');
+                                }
+                            } else {
+                                log('Body element not found', 'error');
+                            }
+                        }
+                    } catch (e) {
+                        log(`Cannot access frame content: ${e.message}`, 'warning');
+                    }
+                    frameOverlay.style.display = 'none';
+                };
+                
+                frame.onerror = function() {
+                    log('Error loading frame', 'error');
+                    frameOverlay.style.display = 'none';
+                };
+                
+                // Load the app
+                frame.src = '/';
+            }
+            
+            // Run initial test
+            setTimeout(testRender, 1000);
+        </script>
+    </div>
+</body>
+</html>

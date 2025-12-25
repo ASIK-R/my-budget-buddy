@@ -1,0 +1,59 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --brand-gradient-1-start: #FFFDEE;
+  --brand-gradient-1-end: #E3EF26;
+  --brand-gradient-2-start: #E2FBCE;
+  --brand-gradient-2-end: #076653;
+  --brand-dark: #0C342C;
+  --brand-accent: #076653;
+  --brand-text: #06231D;
+}
+
+@layer base {
+  body {
+    @apply bg-gray-50 text-brand-text;
+  }
+  
+  .dark {
+    @apply bg-gray-900 text-white;
+  }
+}
+
+@layer components {
+  .card {
+    @apply bg-white dark:bg-gray-800 rounded-2xl shadow-glass border border-white/20 backdrop-blur-xl p-6 transition-all duration-300;
+  }
+  
+  .btn-primary {
+    @apply bg-gradient-1 text-brand-dark font-semibold py-3 px-6 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-brand-accent focus:ring-opacity-50;
+  }
+  
+  .btn-secondary {
+    @apply bg-gradient-2 text-brand-dark font-semibold py-3 px-6 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-brand-accent focus:ring-opacity-50;
+  }
+  
+  .btn-outline {
+    @apply border-2 border-brand-accent text-brand-accent font-semibold py-3 px-6 rounded-xl hover:bg-brand-accent/10 transition-all duration-300;
+  }
+  
+  .glass-effect {
+    @apply bg-glass border border-white/20 backdrop-blur-xl shadow-glass;
+  }
+  
+  .section-title {
+    @apply text-2xl font-bold text-brand-dark dark:text-white mb-6;
+  }
+  
+  .stat-card {
+    @apply bg-gradient-1 dark:bg-gradient-2 rounded-2xl p-5 shadow-md;
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    @apply bg-gradient-1 bg-clip-text text-transparent;
+  }
+}

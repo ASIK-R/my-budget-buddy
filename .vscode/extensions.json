@@ -1,0 +1,20 @@
+{
+  "recommendations": [
+    "esbenp.prettier-vscode",
+    "bradlc.vscode-tailwindcss",
+    "ms-vscode.vscode-typescript-next",
+    "dsznajder.es7-react-js-snippets",
+    "formulahendry.auto-rename-tag",
+    "christian-kohler.path-intellisense",
+    "ms-vscode.vscode-json",
+    "ms-vscode.vscode-eslint",
+    "ms-vscode.vscode-javascript",
+    "ms-vscode.vscode-typescript",
+    "ms-vscode.vscode-css",
+    "ms-vscode.vscode-html",
+    "ms-vscode.vscode-extension-pack"
+  ],
+  "unwantedRecommendations": [
+    "ms-vscode.vscode-typescript-language-features"
+  ]
+}

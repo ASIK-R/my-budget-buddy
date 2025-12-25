@@ -1,0 +1,58 @@
+EXPENSE TRACKER APK BUILDING GUIDE
+=================================
+
+LOCATION OF ANDROID PROJECT:
+E:\ASIK Work station\App - Projects\Expance Treaker\expense-tracker-android
+
+WHERE THE APK WILL BE CREATED:
+E:\ASIK Work station\App - Projects\Expance Treaker\expense-tracker-android\app\build\outputs\apk\debug\app-debug.apk
+
+STEPS TO BUILD THE APK USING ANDROID STUDIO:
+
+1. OPEN THE PROJECT IN ANDROID STUDIO:
+   a. Launch Android Studio
+   b. Select "Open an existing project"
+   c. Navigate to: 
+      E:\ASIK Work station\App - Projects\Expance Treaker\expense-tracker-android
+   d. Click "OK"
+
+2. WAIT FOR GRADLE TO SYNC:
+   - This may take 2-5 minutes
+   - You'll see progress in the status bar
+   - If prompted to update Gradle, click "Don't remind me again"
+
+3. BUILD THE APK:
+   a. Click "Build" in the menu bar
+   b. Select "Build Bundle(s) / APK(s)"
+   c. Click "Build APK"
+
+4. LOCATE THE APK:
+   a. After building completes, a notification will appear
+   b. Click "locate" in the notification
+   OR
+   c. Manually navigate to:
+      expense-tracker-android\app\build\outputs\apk\debug\
+   d. Find the file: app-debug.apk
+
+IMPORTANT NOTES:
+- The APK file does NOT exist until you complete these steps
+- All your Expense Tracker files are embedded in the APK
+- The app works offline without internet connection
+- The APK will be about 2-3 MB in size
+
+TROUBLESHOOTING:
+- If Android Studio asks to update Gradle, click "Don't remind me again"
+- If you see build errors, make sure you have internet connection
+- The first build may take longer than subsequent builds
+- Make sure you have at least 4GB of free disk space
+
+JAVA COMPATIBILITY ISSUES:
+You're experiencing Java version compatibility issues (class file major version 65 = Java 21).
+Android Studio handles these automatically, which is why it's the recommended approach.
+
+ALTERNATIVE METHOD (If you must use command line):
+1. Install Java JDK 11 (not Java 21)
+2. Set JAVA_HOME environment variable
+3. Run: .\gradlew.bat assembleDebug
+
+But using Android Studio is strongly recommended for the best experience.

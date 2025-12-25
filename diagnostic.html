@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>App Diagnostic Tool</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            background-color: #f8fafc;
+            color: #1e293b;
+        }
+        .container {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+        }
+        h1 {
+            color: #0ea5e9;
+            margin-top: 0;
+        }
+        .button {
+            background-color: #0ea5e9;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            font-size: 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 0.5rem 0.25rem;
+        }
+        .button:hover {
+            background-color: #0284c7;
+        }
+        .button.secondary {
+            background-color: #94a3b8;
+        }
+        .button.secondary:hover {
+            background-color: #64748b;
+        }
+        .log {
+            background-color: #1e293b;
+            color: #f8fafc;
+            padding: 1rem;
+            border-radius: 4px;
+            font-family: monospace;
+            white-space: pre-wrap;
+            margin: 1rem 0;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        .error {
+            background-color: #fee2e2;
+            color: #991b1b;
+            padding: 1rem;
+            border-radius: 4px;
+            margin: 1rem 0;
+            border-left: 4px solid #ef4444;
+        }
+        .success {
+            background-color: #dcfce7;
+            color: #166534;
+            padding: 1rem;
+            border-radius: 4px;
+            margin: 1rem 0;
+            border-left: 4px solid #22c55e;
+        }
+        .warning {
+            background-color: #fef3c7;
+            color: #92400e;
+            padding: 1rem;
+            border-radius: 4px;
+            margin: 1rem 0;
+            border-left: 4px solid #f59e0b;
+        }
+        .section {
+            margin: 2rem 0;
+            padding: 1rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 4px;
+        }
+        .iframe-container {
+            width: 100%;
+            height: 300px;
+            border: 1px solid #cbd5e1;
+            border-radius: 4px;
+            margin: 1rem 0;
+            position: relative;
+        }
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            text-align: center;
+            padding: 1rem;
+        }
+        .spinner {
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top: 4px solid #0ea5e9;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin-bottom: 1rem;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Expense Tracker Diagnostic Tool</h1>
+        <p>This tool helps diagnose issues with the main application.</p>
+        
+        <div class="section">
+            <h2>Diagnostic Tests</h2>
+            <button class="button" onclick="runFullDiagnostics()">Run Full Diagnostics</button>
+            <button class="button secondary" onclick="clearLog()">Clear Log</button>
+        </div>
+        
+        <div class="section">
+            <h2>Main App Test</h2>
+            <button class="button" onclick="testMainAppDirect()">Test Direct Access</button>
+            <button class="button" onclick="testMainAppInFrame()">Test in Frame</button>
+        </div>
+        
+        <div class="section">
+            <h2>Results</h2>
+            <div class="iframe-container">
+                <iframe id="appFrame" title="Main App Test"></iframe>
+                <div id="frameOverlay" class="overlay" style="display: none;">
+                    <div class="spinner"></div>
+                    <p>Loading main app...</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>Detailed Log</h2>
+            <div class="log" id="log"></div>
+        </div>
+        
+        <div class="section">
+            <h2>Recommendations</h2>
+            <div id="recommendations">
+                <p>Click "Run Full Diagnostics" to start the analysis.</p>
+            </div>
+        </div>
+        
+        <script>
+            const logElement = document.getElementById('log');
+            const recommendationsElement = document.getElementById('recommendations');
+            const frameOverlay = document.getElementById('frameOverlay');
+            
+            function log(message, type = 'info') {
+                const timestamp = new Date().toLocaleTimeString();
+                const logEntry = `[${timestamp}] ${message}`;
+                
+                let color = '#e2e8f0';
+                if (type === 'error') color = '#fecaca';
+                else if (type === 'success') color = '#bbf7d0';
+                else if (type === 'warning') color = '#fde68a';
+                
+                logElement.innerHTML += `<div style="color: ${color}; margin: 0.25rem 0;">${logEntry}</div>`;
+                logElement.scrollTop = logElement.scrollHeight;
+            }
+            
+            function clearLog() {
+                logElement.innerHTML = '';
+                recommendationsElement.innerHTML = '<p>Click "Run Full Diagnostics" to start the analysis.</p>';
+            }
+            
+            function showRecommendations(recommendations) {
+                let html = '<div>';
+                if (recommendations.length === 0) {
+                    html += '<div class="success"><strong>No critical issues found!</strong> The app should work correctly.</div>';
+                } else {
+                    html += '<h3>Recommended Actions:</h3><ul>';
+                    recommendations.forEach(rec => {
+                        html += `<li class="${rec.type}">${rec.message}</li>`;
+                    });
+                    html += '</ul>';
+                }
+                html += '</div>';
+                recommendationsElement.innerHTML = html;
+            }
+            
+            async function testMainAppDirect() {
+                log('Testing direct access to main app...');
+                try {
+                    const response = await fetch('/', { method: 'GET' });
+                    log(`Response: ${response.status} ${response.statusText}`, 
+                        response.status === 200 ? 'success' : 'error');
+                    
+                    const content = await response.text();
+                    log(`Content length: ${content.length} characters`);
+                    
+                    if (content.includes('id="root"') && content.includes('/src/main.jsx')) {
+                        log('HTML structure looks correct', 'success');
+                        return { success: true, contentLength: content.length };
+                    } else {
+                        log('HTML structure may be incomplete', 'warning');
+                        return { success: false, contentLength: content.length };
+                    }
+                } catch (error) {
+                    log(`Error: ${error.message}`, 'error');
+                    return { success: false, error: error.message };
+                }
+            }
+            
+            function testMainAppInFrame() {
+                log('Loading main app in frame...');
+                frameOverlay.style.display = 'flex';
+                
+                const frame = document.getElementById('appFrame');
+                frame.onload = function() {
+                    log('Main app loaded in frame', 'success');
+                    frameOverlay.style.display = 'none';
+                    
+                    // Try to access frame content (may fail due to CORS)
+                    try {
+                        const doc = frame.contentDocument || frame.contentWindow.document;
+                        if (doc && doc.body) {
+                            const textContent = doc.body.innerText || '';
+                            log(`Frame content length: ${textContent.length} characters`);
+                        }
+                    } catch (e) {
+                        log('Cannot access frame content (CORS restrictions)', 'warning');
+                    }
+                };
+                
+                frame.onerror = function() {
+                    log('Error loading main app in frame', 'error');
+                    frameOverlay.style.display = 'none';
+                };
+                
+                frame.src = '/';
+            }
+            
+            async function runFullDiagnostics() {
+                log('Starting full diagnostics...');
+                const recommendations = [];
+                
+                // Test 1: Check if server is responding
+                log('Test 1: Checking server response...');
+                const serverTest = await testMainAppDirect();
+                
+                if (!serverTest.success) {
+                    recommendations.push({
+                        type: 'error',
+                        message: 'Server is not responding correctly. Restart the development server.'
+                    });
+                }
+                
+                // Test 2: Check for common files
+                log('Test 2: Checking essential files...');
+                const essentialFiles = [
+                    '/src/main.jsx',
+                    '/src/App.jsx',
+                    '/src/index.css'
+                ];
+                
+                for (const file of essentialFiles) {
+                    try {
+                        const response = await fetch(file, { method: 'HEAD' });
+                        if (response.ok) {
+                            log(`✓ Found ${file}`, 'success');
+                        } else {
+                            log(`✗ Missing ${file}`, 'error');
+                            recommendations.push({
+                                type: 'error',
+                                message: `Missing essential file: ${file}`
+                            });
+                        }
+                    } catch (error) {
+                        log(`✗ Error checking ${file}: ${error.message}`, 'error');
+                    }
+                }
+                
+                // Test 3: Check for JavaScript errors by loading in frame
+                log('Test 3: Testing app in frame...');
+                testMainAppInFrame();
+                
+                // Final recommendations
+                showRecommendations(recommendations);
+                log('Diagnostics complete', 'success');
+            }
+            
+            // Initial log
+            log('Diagnostic tool ready');
+            log('Click buttons above to run tests');
+        </script>
+    </div>
+</body>
+</html>

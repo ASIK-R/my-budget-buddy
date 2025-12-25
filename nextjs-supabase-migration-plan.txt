@@ -1,0 +1,128 @@
+NEXT.JS + SUPABASE MIGRATION PLAN
+================================
+
+CURRENT STACK:
+- Frontend: React + Vite
+- Backend: Node.js + Express (local) or Supabase (cloud)
+- Database: MongoDB (local) or Supabase PostgreSQL (cloud)
+- Styling: Tailwind CSS + Framer Motion
+
+TARGET STACK:
+- Frontend: Next.js 13+ (App Router)
+- Backend: Next.js API Routes + Supabase
+- Database: Supabase PostgreSQL
+- Auth: Supabase Auth
+- Styling: Tailwind CSS + Framer Motion
+
+PHASE 1: SETUP NEXT.JS PROJECT
+-----------------------------
+1. Create new Next.js project:
+   npx create-next-app@latest expense-tracker --typescript --tailwind --app --src-dir
+
+2. Copy essential files:
+   - Tailwind config
+   - CSS files
+   - Assets from public folder
+
+PHASE 2: MIGRATE COMPONENTS
+---------------------------
+1. Migrate UI components:
+   - Copy src/components/ to new project
+   - Update imports for Next.js (use 'next/router' instead of 'react-router-dom')
+   - Convert class components to functional components if needed
+
+2. Migrate pages:
+   - Convert React Router routes to Next.js App Router
+   - Move pages to app/ directory with page.tsx structure
+   - Update navigation components
+
+PHASE 3: SUPABASE INTEGRATION
+-----------------------------
+1. Set up Supabase:
+   - Create new Supabase project
+   - Configure authentication providers
+   - Run SUPABASE_SCHEMA.sql to create tables
+
+2. Install Supabase client:
+   npm install @supabase/supabase-js
+
+3. Create Supabase client utilities:
+   - supabaseClient.ts
+   - supabaseAuth.ts
+   - supabaseDB.ts
+
+PHASE 4: MIGRATE STATE MANAGEMENT
+---------------------------------
+1. Replace AppContext with:
+   - Zustand for global state
+   - Supabase for data state
+   - React Context for theme and UI state only
+
+2. Update data fetching:
+   - Replace direct API calls with Supabase queries
+   - Implement real-time subscriptions where needed
+
+PHASE 5: MIGRATE API ROUTES
+---------------------------
+1. Move backend functionality to Next.js API routes:
+   - transactions API → /api/transactions
+   - budgets API → /api/budgets
+   - wallets API → /api/wallets
+
+2. Remove Express server dependency
+
+PHASE 6: MIGRATE AUTHENTICATION
+-------------------------------
+1. Replace current auth with Supabase Auth:
+   - Sign up/in/out functions
+   - Session management
+   - Protected routes
+
+PHASE 7: MIGRATE DATABASE
+-------------------------
+1. Update data models to match Supabase schema
+2. Replace MongoDB operations with Supabase queries
+3. Implement real-time subscriptions
+
+PHASE 8: MIGRATE PWA FUNCTIONALITY
+----------------------------------
+1. Add PWA support with next-pwa
+2. Configure service worker
+3. Ensure offline functionality works
+
+PHASE 9: TESTING & DEPLOYMENT
+-----------------------------
+1. Test all functionality
+2. Deploy to Vercel
+3. Configure custom domain if needed
+
+TIMELINE ESTIMATE:
+- Phase 1-2: 2-3 days
+- Phase 3-4: 3-4 days
+- Phase 5-6: 2-3 days
+- Phase 7-8: 3-4 days
+- Phase 9: 1-2 days
+
+TOTAL: 11-17 days for full migration
+
+BENEFITS OF MIGRATION:
+1. Better SEO with SSR
+2. Faster initial load times
+3. Integrated full-stack development
+4. Built-in API routes
+5. Improved performance with Next.js optimizations
+6. Easier deployment with Vercel
+7. Real-time database with Supabase
+8. Built-in authentication with Supabase Auth
+
+KEEP CURRENT FUNCTIONALITY:
+1. All existing features will be preserved
+2. UI/UX design will remain the same
+3. Offline support will be maintained
+4. Mobile responsiveness will be kept
+
+CHALLENGES:
+1. Learning curve for Next.js App Router
+2. Updating data fetching patterns
+3. Migrating authentication system
+4. Ensuring data consistency during migration

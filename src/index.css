@@ -1,0 +1,1579 @@
+/* stylelint-disable at-rule-no-unknown */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+/* stylelint-enable at-rule-no-unknown */
+
+/* Enhanced CSS variables for modern UI */
+:root {
+  /* Brand Color Palette */
+
+  /* Gradient 1: #FFFDEE → #E3EF26 */
+  --gradient-1-start: #FFFDEE;
+  --gradient-1-end: #E3EF26;
+  
+  /* Gradient 2: #E2FBCE → #076653 */
+  --gradient-2-start: #E2FBCE;
+  --gradient-2-end: #076653;
+  
+  /* Solid Colors */
+  --brand-dark: #0C342C;
+  --brand-accent: #076653;
+  --brand-text: #06231D;
+  
+  /* Enhanced Text Colors for Better Readability */
+  --text-primary-light: #06231D;     /* Primary text in light mode */
+  --text-secondary-light: #334155;   /* Secondary text in light mode */
+  --text-tertiary-light: #64748b;    /* Tertiary text in light mode */
+  --text-disabled-light: #94a3b8;    /* Disabled text in light mode */
+  --text-primary-dark: #f8fafc;      /* Primary text in dark mode */
+  --text-secondary-dark: #e2e8f0;    /* Secondary text in dark mode */
+  --text-tertiary-dark: #94a3b8;     /* Tertiary text in dark mode */
+  --text-disabled-dark: #64748b;     /* Disabled text in dark mode */
+  
+  /* Success, Warning, Error Colors */
+  --success-light: #16a34a;
+  --success-dark: #4ade80;
+  --warning-light: #d97706;
+  --warning-dark: #fbbf24;
+  --error-light: #dc2626;
+  --error-dark: #f87171;
+  
+  /* Modern UI variables */
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-2xl: 1.25rem;
+  --radius-3xl: 1.5rem;
+  --radius-full: 9999px;
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 5%);
+  --shadow: 0 1px 3px 0 rgb(0 0 0 / 10%), 0 1px 2px -1px rgb(0 0 0 / 10%);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 10%), 0 2px 4px -2px rgb(0 0 0 / 10%);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 10%), 0 4px 6px -4px rgb(0 0 0 / 10%);
+  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 10%), 0 8px 10px -6px rgb(0 0 0 / 10%);
+  --shadow-2xl: 0 25px 50px -12px rgb(0 0 0 / 25%);
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 500ms cubic-bezier(0.4, 0, 0.2, 1);
+  --spacing-1: 0.25rem;
+  --spacing-2: 0.5rem;
+  --spacing-3: 0.75rem;
+  --spacing-4: 1rem;
+  --spacing-5: 1.25rem;
+  --spacing-6: 1.5rem;
+  --spacing-8: 2rem;
+  --spacing-10: 2.5rem;
+  --spacing-12: 3rem;
+  
+  /* Mobile-specific variables */
+  --mobile-safe-area-top: env(safe-area-inset-top, 0px);
+  --mobile-safe-area-bottom: env(safe-area-inset-bottom, 0px);
+  --mobile-safe-area-left: env(safe-area-inset-left, 0px);
+  --mobile-safe-area-right: env(safe-area-inset-right, 0px);
+  --touch-target-min: 44px;
+  --touch-target-large-min: 56px;
+}
+
+/* Base styles */
+body {
+  font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  /* Ensure the body takes full height */
+  min-height: 100vh;
+}
+
+/* Consistent heading styles */
+.page-title {
+  @apply text-2xl md:text-3xl lg:text-4xl font-bold text-brand-dark dark:text-white;
+
+  line-height: 1.2;
+}
+
+.section-title {
+  @apply text-xl md:text-2xl lg:text-3xl font-bold text-primary mb-4;
+
+  line-height: 1.25;
+}
+
+.page-subtitle {
+  @apply text-sm md:text-base lg:text-lg text-secondary mt-1;
+
+  line-height: 1.5;
+}
+
+.card-title {
+  @apply text-lg md:text-xl lg:text-2xl font-bold text-primary mb-4;
+
+  line-height: 1.3;
+}
+
+.card-subtitle {
+  @apply text-sm md:text-base text-secondary mb-2;
+
+  line-height: 1.4;
+}
+
+/* Enhanced Custom Components */
+.card {
+  @apply bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6 border border-gray-100 dark:border-gray-700/50 transition-all duration-300;
+
+  box-shadow: 0 4px 12px rgb(0 0 0 / 5%);
+}
+
+.card:hover {
+  @apply shadow-xl;
+
+  transform: translateY(-2px);
+}
+
+/* Responsive card padding */
+.card.responsive-padding {
+  @apply p-4 sm:p-5 md:p-6 lg:p-7 xl:p-8;
+}
+
+.card-content {
+  @apply text-primary;
+}
+
+.card-caption {
+  @apply text-tertiary text-sm;
+}
+
+/* Consistent stat cards */
+.stat-card {
+  @apply card;
+  @apply p-4 sm:p-5 md:p-6;
+}
+
+.stat-card-title {
+  @apply text-xs sm:text-sm font-semibold text-tertiary mb-1;
+}
+
+.stat-card-value {
+  @apply text-lg sm:text-xl md:text-2xl font-bold text-primary;
+}
+
+.stat-card-icon {
+  @apply rounded-xl p-2 sm:p-3;
+}
+
+/* Enhanced Glass card with brand colors */
+.glass-card {
+  background: rgb(255 253 238 / 80%);
+  backdrop-filter: blur(12px);
+  border-radius: var(--radius-2xl);
+  border: 1px solid rgb(227 239 38 / 30%);
+  box-shadow: 0 8px 32px 0 rgb(7 102 83 / 15%);
+  padding: var(--spacing-6);
+  transition: all var(--transition-normal);
+
+  /* Fallback for browsers that don't support backdrop-filter */
+  @supports not (backdrop-filter: blur(10px)) {
+    background: rgb(255 253 238 / 95%);
+  }
+}
+
+.glass-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 40px 0 rgb(7 102 83 / 20%);
+}
+
+
+
+/* Enhanced Buttons */
+.btn {
+  @apply inline-flex items-center justify-center rounded-xl font-semibold transition-all cursor-pointer border-none px-4 py-2.5 sm:px-5 sm:py-3;
+
+  transition: all var(--transition-fast);
+  box-shadow: 0 2px 6px rgb(0 0 0 / 10%);
+}
+
+.btn:focus {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgb(0 0 0 / 15%);
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--gradient-1-start), var(--gradient-1-end));
+  color: var(--brand-dark);
+  font-weight: 700;
+  border: none;
+  box-shadow: 0 4px 12px rgb(227 239 38 / 30%);
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, var(--gradient-1-end), var(--gradient-1-start));
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px rgb(227 239 38 / 40%);
+}
+
+/* Enhanced darker green button variant */
+.btn-dark-green {
+  background: linear-gradient(135deg, #076653, #06231D);
+  color: white;
+  font-weight: 700;
+  border: none;
+  box-shadow: 0 4px 12px rgb(7 102 83 / 30%);
+}
+
+.btn-dark-green:hover {
+  background: linear-gradient(135deg, #06231D, #076653);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px rgb(7 102 83 / 40%);
+}
+
+.btn-secondary {
+  background: linear-gradient(135deg, var(--gradient-2-start), var(--gradient-2-end));
+  color: white;
+  font-weight: 700;
+  border: none;
+  box-shadow: 0 4px 12px rgb(7 102 83 / 30%);
+}
+
+.btn-secondary:hover {
+  background: linear-gradient(135deg, var(--gradient-2-end), var(--gradient-2-start));
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px rgb(7 102 83 / 40%);
+}
+
+/* Outline buttons */
+.btn-outline {
+  @apply border-2 border-brand-accent text-brand-accent bg-transparent;
+
+  font-weight: 600;
+}
+
+.btn-outline:hover {
+  @apply bg-brand-accent text-white;
+}
+
+/* Small buttons */
+.btn-sm {
+  @apply px-3 py-2 sm:px-3.5 sm:py-2.5 text-xs sm:text-sm min-h-[44px];
+}
+
+/* Medium buttons */
+.btn-md {
+  @apply px-4 py-2.5 sm:px-5 sm:py-3 text-sm sm:text-base min-h-[44px];
+}
+
+/* Large buttons */
+.btn-lg {
+  @apply px-5 py-3 sm:px-6 sm:py-3.5 text-base sm:text-lg min-h-[48px];
+}
+
+
+/* Enhanced Form Inputs */
+.form-input {
+  @apply w-full rounded-xl border border-gray-300 px-3 py-3 sm:px-4 sm:py-3.5 text-sm sm:text-base transition-all text-primary min-h-[44px];
+
+  transition: all var(--transition-fast);
+  box-shadow: 0 1px 3px rgb(0 0 0 / 5%);
+  background-color: white;
+}
+
+/* Mobile-optimized form inputs */
+@media (max-width: 639px) {
+  .form-input {
+    @apply py-3.5 text-base;
+    min-height: 48px;
+  }
+  
+  .form-input::placeholder {
+    font-size: 16px; /* Prevents zoom on iOS Safari */
+  }
+}
+.form-input:focus {
+  @apply outline-none border-primary-500 ring-4 ring-primary-500/20;
+
+  box-shadow: 0 2px 8px rgb(227 239 38 / 20%);
+}
+
+.form-input::placeholder {
+  @apply text-tertiary;
+}
+
+.form-select {
+  @apply form-input pr-10 appearance-none min-h-[44px];
+
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='currentColor'%3e%3cpath fill-rule='evenodd' d='M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z' clip-rule='evenodd' /%3e%3c/svg%3e");
+  background-position: right 0.5rem center;
+  background-repeat: no-repeat;
+  background-size: 1.5em 1.5em;
+}
+
+/* Mobile-optimized form selects */
+@media (max-width: 639px) {
+  .form-select {
+    @apply py-3.5 text-base;
+    min-height: 48px;
+  }
+}
+
+/* Focus ring for accessibility */
+.focus-ring:focus {
+  @apply outline-2 outline-primary-500 outline-offset-2;
+}
+
+/* Enhanced Gradient backgrounds */
+.bg-gradient-1 {
+  background: linear-gradient(135deg, var(--gradient-1-start), var(--gradient-1-end));
+}
+
+.bg-gradient-2 {
+  background: linear-gradient(135deg, var(--gradient-2-start), var(--gradient-2-end));
+}
+
+/* Enhanced Gradient text */
+.gradient-text {
+  background: linear-gradient(135deg, var(--gradient-1-start), var(--gradient-1-end));
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 800;
+}
+
+.text-brand-dark {
+  color: var(--brand-dark);
+}
+
+.text-brand-accent {
+  color: var(--brand-accent);
+}
+
+.text-brand-text {
+  color: var(--brand-text);
+}
+
+/* Enhanced Text Color Classes for Better Readability */
+.text-primary {
+  color: var(--text-primary-light);
+}
+
+.dark .text-primary {
+  color: var(--text-primary-dark);
+}
+
+.text-secondary {
+  color: var(--text-secondary-light);
+}
+
+.dark .text-secondary {
+  color: var(--text-secondary-dark);
+}
+
+.text-tertiary {
+  color: var(--text-tertiary-light);
+}
+
+.dark .text-tertiary {
+  color: var(--text-tertiary-dark);
+}
+
+.text-disabled {
+  color: var(--text-disabled-light);
+}
+
+.dark .text-disabled {
+  color: var(--text-disabled-dark);
+}
+
+/* Enhanced Status Colors */
+.text-success {
+  color: var(--success-light);
+}
+
+.dark .text-success {
+  color: var(--success-dark);
+}
+
+.text-warning {
+  color: var(--warning-light);
+}
+
+.dark .text-warning {
+  color: var(--warning-dark);
+}
+
+.text-error {
+  color: var(--error-light);
+}
+
+.dark .text-error {
+  color: var(--error-dark);
+}
+
+/* Glass effect utility class */
+.glass-effect {
+  background: rgb(255 255 255 / 25%);
+  backdrop-filter: blur(12px);
+  border-radius: var(--radius-xl);
+  border: 1px solid rgb(255 255 255 / 18%);
+  box-shadow: 0 8px 32px 0 rgb(31 38 135 / 37%);
+}
+
+.glass-effect:hover {
+  box-shadow: 0 12px 40px 0 rgb(31 38 135 / 45%);
+}
+
+
+
+/* Stat Card Enhancement */
+.stat-card-enhanced {
+  @apply bg-gradient-to-br from-white to-gray-50 dark:from-gray-800 dark:to-gray-900 rounded-2xl p-5 border border-gray-100 dark:border-gray-700/50 shadow-md transition-all duration-300;
+
+  box-shadow: 0 4px 12px rgb(0 0 0 / 5%);
+}
+
+.stat-card-enhanced:hover {
+  @apply shadow-lg;
+
+  transform: translateY(-3px);
+}
+
+.stat-card-enhanced-title {
+  @apply text-xs md:text-sm font-semibold text-tertiary mb-1;
+}
+
+.stat-card-enhanced-value {
+  @apply text-lg md:text-2xl font-bold text-primary;
+}
+
+.stat-card-enhanced-icon {
+  @apply rounded-xl p-3;
+}
+
+/* Navigation item active state */
+.nav-item-active {
+  background-color: var(--primary-500);
+  color: white;
+}
+
+/* Enhanced responsive grid utilities for better layout control */
+.grid-cols-responsive {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1rem;
+}
+
+.grid-cols-responsive-sm {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 0.75rem;
+}
+
+.grid-cols-responsive-lg {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1.25rem;
+}
+
+/* Additional responsive grid utilities */
+.grid-cols-responsive-xs {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 0.5rem;
+}
+
+.grid-cols-responsive-xl {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+  gap: 1.5rem;
+}
+
+/* Container queries for more flexible responsive design */
+@container (min-width: 320px) {
+  .container-sm-p-2 { padding: var(--spacing-2); }
+  .container-sm-p-3 { padding: var(--spacing-3); }
+  .container-sm-gap-2 { gap: var(--spacing-2); }
+  .container-sm-gap-3 { gap: var(--spacing-3); }
+}
+
+@container (min-width: 640px) {
+  .container-md-p-4 { padding: var(--spacing-4); }
+  .container-md-p-5 { padding: var(--spacing-5); }
+  .container-md-gap-4 { gap: var(--spacing-4); }
+  .container-md-gap-5 { gap: var(--spacing-5); }
+  
+  .grid-cols-container-sm {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+}
+
+@container (min-width: 1024px) {
+  .container-lg-p-6 { padding: var(--spacing-6); }
+  .container-lg-p-8 { padding: var(--spacing-8); }
+  .container-lg-gap-6 { gap: var(--spacing-6); }
+  .container-lg-gap-8 { gap: var(--spacing-8); }
+  
+  .grid-cols-container-md {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+  }
+}
+
+@container (min-width: 1280px) {
+  .grid-cols-container-lg {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+  }
+}
+
+/* Additional container queries for better responsiveness */
+@container (min-width: 1536px) {
+  .container-xl-p-10 { padding: var(--spacing-10); }
+  .container-xl-p-12 { padding: var(--spacing-12); }
+  .container-xl-gap-10 { gap: var(--spacing-10); }
+  .container-xl-gap-12 { gap: var(--spacing-12); }
+  
+  .grid-cols-container-xl {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 2rem;
+  }
+}
+
+/* Enhanced card components with better responsive behavior */
+.card-enhanced {
+  @apply bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6 border border-gray-100 dark:border-gray-700/50 transition-all duration-300;
+
+  box-shadow: 0 4px 12px rgb(0 0 0 / 5%);
+}
+
+.card-enhanced:hover {
+  @apply shadow-xl;
+
+  transform: translateY(-2px);
+}
+
+/* Responsive card padding */
+.card-enhanced.responsive-padding {
+  @apply p-4 sm:p-5 md:p-6 lg:p-7 xl:p-8;
+}
+
+/* Enhanced stat cards with better responsive layout */
+.stat-card-layout {
+  @apply card-enhanced;
+  @apply p-4 sm:p-5 md:p-6;
+}
+
+.stat-card-layout-title {
+  @apply text-xs sm:text-sm font-semibold text-tertiary mb-1;
+}
+
+.stat-card-layout-value {
+  @apply text-lg sm:text-xl md:text-2xl font-bold text-primary;
+}
+
+.stat-card-layout-icon {
+  @apply rounded-xl p-2 sm:p-3;
+}
+
+/* Enhanced buttons with better responsive sizing */
+.btn-enhanced {
+  @apply inline-flex items-center justify-center rounded-xl font-semibold transition-all cursor-pointer border-none px-4 py-2.5 sm:px-5 sm:py-3 min-h-[44px];
+  transition: all var(--transition-fast);
+  box-shadow: 0 2px 6px rgb(0 0 0 / 10%);
+}
+
+/* Responsive button sizes */
+.btn-enhanced-sm {
+  @apply px-3 py-2 sm:px-3.5 sm:py-2.5 text-xs sm:text-sm min-h-[44px];
+}
+
+.btn-enhanced-md {
+  @apply px-4 py-2.5 sm:px-5 sm:py-3 text-sm sm:text-base min-h-[44px];
+}
+
+.btn-enhanced-lg {
+  @apply px-5 py-3 sm:px-6 sm:py-3.5 text-base sm:text-lg min-h-[48px];
+}
+/* Enhanced form inputs with better responsive sizing */
+.form-input-enhanced {
+  @apply w-full rounded-xl border border-gray-300 px-3 py-3 sm:px-4 sm:py-3.5 text-sm sm:text-base transition-all text-primary min-h-[44px];
+
+  transition: all var(--transition-fast);
+  box-shadow: 0 1px 3px rgb(0 0 0 / 5%);
+  background-color: white;
+}
+
+/* Mobile-optimized enhanced form inputs */
+@media (max-width: 639px) {
+  .form-input-enhanced {
+    @apply py-3.5 text-base;
+    min-height: 48px;
+  }
+  
+  .form-input-enhanced::placeholder {
+    font-size: 16px; /* Prevents zoom on iOS Safari */
+  }
+}
+/* Enhanced spacing utilities for better responsive design */
+.space-y-responsive > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-y-reverse: 0;
+
+  margin-top: calc(1rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(1rem * var(--tw-space-y-reverse));
+}
+
+@media (width >= 640px) {
+  .space-y-responsive > :not([hidden]) ~ :not([hidden]) {
+    --tw-space-y-reverse: 0;
+
+    margin-top: calc(1.25rem * calc(1 - var(--tw-space-y-reverse)));
+    margin-bottom: calc(1.25rem * var(--tw-space-y-reverse));
+  }
+}
+
+@media (width >= 768px) {
+  .space-y-responsive > :not([hidden]) ~ :not([hidden]) {
+    --tw-space-y-reverse: 0;
+
+    margin-top: calc(1.5rem * calc(1 - var(--tw-space-y-reverse)));
+    margin-bottom: calc(1.5rem * var(--tw-space-y-reverse));
+  }
+}
+
+@media (width >= 1024px) {
+  .space-y-responsive > :not([hidden]) ~ :not([hidden]) {
+    --tw-space-y-reverse: 0;
+
+    margin-top: calc(2rem * calc(1 - var(--tw-space-y-reverse)));
+    margin-bottom: calc(2rem * var(--tw-space-y-reverse));
+  }
+}
+
+/* Additional responsive spacing utilities */
+.space-x-responsive > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-x-reverse: 0;
+
+  margin-right: calc(1rem * var(--tw-space-x-reverse));
+  margin-left: calc(1rem * calc(1 - var(--tw-space-x-reverse)));
+}
+
+@media (width >= 640px) {
+  .space-x-responsive > :not([hidden]) ~ :not([hidden]) {
+    --tw-space-x-reverse: 0;
+
+    margin-right: calc(1.25rem * var(--tw-space-x-reverse));
+    margin-left: calc(1.25rem * calc(1 - var(--tw-space-x-reverse)));
+  }
+}
+
+@media (width >= 768px) {
+  .space-x-responsive > :not([hidden]) ~ :not([hidden]) {
+    --tw-space-x-reverse: 0;
+
+    margin-right: calc(1.5rem * var(--tw-space-x-reverse));
+    margin-left: calc(1.5rem * calc(1 - var(--tw-space-x-reverse)));
+  }
+}
+
+@media (width >= 1024px) {
+  .space-x-responsive > :not([hidden]) ~ :not([hidden]) {
+    --tw-space-x-reverse: 0;
+
+    margin-right: calc(2rem * var(--tw-space-x-reverse));
+    margin-left: calc(2rem * calc(1 - var(--tw-space-x-reverse)));
+  }
+}
+
+/* Enhanced flex utilities for better responsive layout */
+.flex-responsive {
+  @apply flex flex-col;
+}
+
+@media (width >= 768px) {
+  .flex-responsive {
+    @apply flex-row;
+  }
+}
+
+/* Reverse flex direction on smaller screens */
+.flex-responsive-reverse {
+  @apply flex flex-col-reverse;
+}
+
+@media (width >= 768px) {
+  .flex-responsive-reverse {
+    @apply flex-row-reverse;
+  }
+}
+
+/* Enhanced section spacing for better visual hierarchy */
+.section-spacing {
+  @apply py-4 sm:py-5 md:py-6 lg:py-8;
+}
+
+/* Additional section spacing utilities */
+.section-spacing-x {
+  @apply px-4 sm:px-5 md:px-6 lg:px-8;
+}
+
+.section-spacing-xy {
+  @apply p-4 sm:p-5 md:p-6 lg:p-8;
+}
+
+/* Enhanced header styles for better responsive behavior */
+.header-responsive {
+  @apply px-3 py-3 sm:px-4 sm:py-4 md:px-5 md:py-5;
+}
+
+/* Additional header utilities */
+.header-responsive-sm {
+  @apply px-2 py-2 sm:px-3 sm:py-3 md:px-4 md:py-4;
+}
+
+.header-responsive-lg {
+  @apply px-4 py-4 sm:px-5 sm:py-5 md:px-6 md:py-6 lg:px-8 lg:py-8;
+}
+
+/* Enhanced text utilities for better responsive typography */
+.text-responsive {
+  @apply text-sm sm:text-base md:text-lg lg:text-xl;
+}
+
+/* Additional text utilities */
+.text-responsive-sm {
+  @apply text-xs sm:text-sm md:text-base lg:text-lg;
+}
+
+.text-responsive-lg {
+  @apply text-base sm:text-lg md:text-xl lg:text-2xl;
+}
+
+.text-responsive-xl {
+  @apply text-lg sm:text-xl md:text-2xl lg:text-3xl;
+}
+
+/* Fluid typography utilities for better scaling */
+.text-fluid-xs {
+  font-size: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
+}
+
+.text-fluid-sm {
+  font-size: clamp(0.875rem, 0.8rem + 0.35vw, 1rem);
+}
+
+.text-fluid-base {
+  font-size: clamp(1rem, 0.9rem + 0.5vw, 1.125rem);
+}
+
+.text-fluid-lg {
+  font-size: clamp(1.125rem, 1rem + 0.6vw, 1.25rem);
+}
+
+.text-fluid-xl {
+  font-size: clamp(1.25rem, 1.1rem + 0.75vw, 1.5rem);
+}
+
+.text-fluid-2xl {
+  font-size: clamp(1.5rem, 1.3rem + 1vw, 1.875rem);
+}
+
+.text-fluid-3xl {
+  font-size: clamp(1.875rem, 1.6rem + 1.35vw, 2.25rem);
+}
+
+.text-fluid-4xl {
+  font-size: clamp(2.25rem, 1.9rem + 1.75vw, 3rem);
+}
+
+.text-fluid-5xl {
+  font-size: clamp(3rem, 2.5rem + 2.5vw, 3.75rem);
+}
+
+/* Additional fluid typography utilities */
+.text-fluid-hero {
+  font-size: clamp(2.5rem, 2rem + 3vw, 4.5rem);
+  line-height: 1.1;
+}
+
+.text-fluid-heading {
+  font-size: clamp(1.75rem, 1.5rem + 1.5vw, 3rem);
+  line-height: 1.2;
+}
+
+/* Enhanced typography scale with better readability */
+.text-scale-xs {
+  font-size: 0.75rem; /* 12px */
+  line-height: 1.33;
+}
+
+.text-scale-sm {
+  font-size: 0.875rem; /* 14px */
+  line-height: 1.43;
+}
+
+.text-scale-base {
+  font-size: 1rem; /* 16px */
+  line-height: 1.5;
+}
+
+.text-scale-lg {
+  font-size: 1.125rem; /* 18px */
+  line-height: 1.55;
+}
+
+.text-scale-xl {
+  font-size: 1.25rem; /* 20px */
+  line-height: 1.6;
+}
+
+.text-scale-2xl {
+  font-size: 1.5rem; /* 24px */
+  line-height: 1.4;
+}
+
+.text-scale-3xl {
+  font-size: 1.875rem; /* 30px */
+  line-height: 1.3;
+}
+
+.text-scale-4xl {
+  font-size: 2.25rem; /* 36px */
+  line-height: 1.2;
+}
+
+.text-scale-5xl {
+  font-size: 3rem; /* 48px */
+  line-height: 1.1;
+}
+
+/* Enhanced font weight utilities for better hierarchy */
+.font-weight-light {
+  font-weight: 300;
+}
+
+.font-weight-normal {
+  font-weight: 400;
+}
+
+.font-weight-medium {
+  font-weight: 500;
+}
+
+.font-weight-semibold {
+  font-weight: 600;
+}
+
+.font-weight-bold {
+  font-weight: 700;
+}
+
+.font-weight-extrabold {
+  font-weight: 800;
+}
+
+/* Enhanced letter spacing utilities */
+.tracking-tightest {
+  letter-spacing: -0.05em;
+}
+
+.tracking-tighter {
+  letter-spacing: -0.025em;
+}
+
+.tracking-tight {
+  letter-spacing: -0.0125em;
+}
+
+.tracking-normal {
+  letter-spacing: 0;
+}
+
+.tracking-wide {
+  letter-spacing: 0.0125em;
+}
+
+.tracking-wider {
+  letter-spacing: 0.025em;
+}
+
+.tracking-widest {
+  letter-spacing: 0.05em;
+}
+
+/* Enhanced padding utilities for better responsive spacing */
+.p-responsive {
+  @apply p-3 sm:p-4 md:p-5 lg:p-6;
+}
+
+.m-responsive {
+  @apply m-3 sm:m-4 md:m-5 lg:m-6;
+}
+
+/* Additional responsive padding utilities */
+.p-responsive-sm {
+  @apply p-2 sm:p-3 md:p-4 lg:p-5;
+}
+
+.p-responsive-lg {
+  @apply p-4 sm:p-5 md:p-6 lg:p-8;
+}
+
+.p-responsive-xl {
+  @apply p-5 sm:p-6 md:p-8 lg:p-10;
+}
+
+/* Enhanced rounded utilities for better responsive design */
+.rounded-responsive {
+  @apply rounded-lg sm:rounded-xl md:rounded-2xl;
+}
+
+/* Additional rounded utilities */
+.rounded-responsive-sm {
+  @apply rounded-md sm:rounded-lg md:rounded-xl;
+}
+
+.rounded-responsive-lg {
+  @apply rounded-xl sm:rounded-2xl md:rounded-3xl;
+}
+
+/* Enhanced shadow utilities for better responsive design */
+.shadow-responsive {
+  @apply shadow sm:shadow-md md:shadow-lg;
+}
+
+/* Additional shadow utilities */
+.shadow-responsive-sm {
+  @apply shadow-sm sm:shadow md:shadow-lg;
+}
+
+.shadow-responsive-lg {
+  @apply shadow-md sm:shadow-lg md:shadow-xl;
+}
+
+/* Enhanced transition utilities for better responsive animations */
+.transition-responsive {
+  @apply transition-all duration-200 sm:duration-300;
+}
+
+/* Additional transition utilities */
+.transition-responsive-sm {
+  @apply transition-all duration-150 sm:duration-200;
+}
+
+.transition-responsive-lg {
+  @apply transition-all duration-300 sm:duration-500;
+}
+
+/* Enhanced height utilities for better responsive layout */
+.h-responsive {
+  @apply h-auto sm:h-screen md:h-screen;
+}
+
+/* Additional height utilities */
+.h-responsive-sm {
+  @apply h-auto sm:h-[80vh] md:h-[90vh];
+}
+
+.h-responsive-lg {
+  @apply h-auto sm:h-[90vh] md:h-screen;
+}
+
+/* Enhanced width utilities for better responsive layout */
+.w-responsive {
+  @apply w-full sm:w-full md:w-auto;
+}
+
+/* Additional width utilities */
+.w-responsive-sm {
+  @apply w-full sm:w-11/12 md:w-10/12 lg:w-9/12;
+}
+
+.w-responsive-lg {
+  @apply w-full sm:w-full md:w-11/12 lg:w-10/12 xl:w-9/12;
+}
+
+/* Enhanced gap utilities for better responsive spacing */
+.gap-responsive {
+  @apply gap-2 sm:gap-3 md:gap-4 lg:gap-5;
+}
+
+/* Additional gap utilities */
+.gap-responsive-sm {
+  @apply gap-1 sm:gap-2 md:gap-3 lg:gap-4;
+}
+
+.gap-responsive-lg {
+  @apply gap-3 sm:gap-4 md:gap-5 lg:gap-6 xl:gap-8;
+}
+
+/* Enhanced margin utilities for better responsive spacing */
+.mx-responsive {
+  @apply mx-2 sm:mx-3 md:mx-4 lg:mx-5;
+}
+
+.my-responsive {
+  @apply my-2 sm:my-3 md:my-4 lg:my-5;
+}
+
+.px-responsive {
+  @apply px-2 sm:px-3 md:px-4 lg:px-5;
+}
+
+.py-responsive {
+  @apply py-2 sm:py-3 md:py-4 lg:py-5;
+}
+
+/* Additional margin utilities */
+.mx-responsive-sm {
+  @apply mx-1 sm:mx-2 md:mx-3 lg:mx-4;
+}
+
+.mx-responsive-lg {
+  @apply mx-3 sm:mx-4 md:mx-5 lg:mx-6 xl:mx-8;
+}
+
+.my-responsive-sm {
+  @apply my-1 sm:my-2 md:my-3 lg:my-4;
+}
+
+.my-responsive-lg {
+  @apply my-3 sm:my-4 md:my-5 lg:my-6 xl:my-8;
+}
+
+/* Consistent spacing scale based on design system */
+.spacing-1 {
+  margin: var(--spacing-1);
+  padding: var(--spacing-1);
+}
+
+.spacing-2 {
+  margin: var(--spacing-2);
+  padding: var(--spacing-2);
+}
+
+.spacing-3 {
+  margin: var(--spacing-3);
+  padding: var(--spacing-3);
+}
+
+.spacing-4 {
+  margin: var(--spacing-4);
+  padding: var(--spacing-4);
+}
+
+.spacing-5 {
+  margin: var(--spacing-5);
+  padding: var(--spacing-5);
+}
+
+.spacing-6 {
+  margin: var(--spacing-6);
+  padding: var(--spacing-6);
+}
+
+.spacing-8 {
+  margin: var(--spacing-8);
+  padding: var(--spacing-8);
+}
+
+.spacing-10 {
+  margin: var(--spacing-10);
+  padding: var(--spacing-10);
+}
+
+.spacing-12 {
+  margin: var(--spacing-12);
+  padding: var(--spacing-12);
+}
+
+/* Directional spacing utilities */
+.pt-responsive {
+  @apply pt-2 sm:pt-3 md:pt-4 lg:pt-5;
+}
+
+.pb-responsive {
+  @apply pb-2 sm:pb-3 md:pb-4 lg:pb-5;
+}
+
+.pl-responsive {
+  @apply pl-2 sm:pl-3 md:pl-4 lg:pl-5;
+}
+
+.pr-responsive {
+  @apply pr-2 sm:pr-3 md:pr-4 lg:pr-5;
+}
+
+.mt-responsive {
+  @apply mt-2 sm:mt-3 md:mt-4 lg:mt-5;
+}
+
+.mb-responsive {
+  @apply mb-2 sm:mb-3 md:mb-4 lg:mb-5;
+}
+
+.ml-responsive {
+  @apply ml-2 sm:ml-3 md:ml-4 lg:ml-5;
+}
+
+.mr-responsive {
+  @apply mr-2 sm:mr-3 md:mr-4 lg:mr-5;
+}
+
+/* Additional directional spacing utilities */
+.pt-responsive-sm {
+  @apply pt-1 sm:pt-2 md:pt-3 lg:pt-4;
+}
+
+.pt-responsive-lg {
+  @apply pt-3 sm:pt-4 md:pt-5 lg:pt-6 xl:pt-8;
+}
+
+.pb-responsive-sm {
+  @apply pb-1 sm:pb-2 md:pb-3 lg:pb-4;
+}
+
+.pb-responsive-lg {
+  @apply pb-3 sm:pb-4 md:pb-5 lg:pb-6 xl:pb-8;
+}
+
+/* Fluid spacing utilities */
+.spacing-fluid-1 {
+  margin: clamp(0.25rem, 0.2rem + 0.25vw, 0.5rem);
+  padding: clamp(0.25rem, 0.2rem + 0.25vw, 0.5rem);
+}
+
+.spacing-fluid-2 {
+  margin: clamp(0.5rem, 0.4rem + 0.5vw, 1rem);
+  padding: clamp(0.5rem, 0.4rem + 0.5vw, 1rem);
+}
+
+.spacing-fluid-3 {
+  margin: clamp(0.75rem, 0.6rem + 0.75vw, 1.5rem);
+  padding: clamp(0.75rem, 0.6rem + 0.75vw, 1.5rem);
+}
+
+.spacing-fluid-4 {
+  margin: clamp(1rem, 0.8rem + 1vw, 2rem);
+  padding: clamp(1rem, 0.8rem + 1vw, 2rem);
+}
+
+.spacing-fluid-5 {
+  margin: clamp(1.5rem, 1.2rem + 1.5vw, 3rem);
+  padding: clamp(1.5rem, 1.2rem + 1.5vw, 3rem);
+}
+
+.spacing-fluid-6 {
+  margin: clamp(2rem, 1.6rem + 2vw, 4rem);
+  padding: clamp(2rem, 1.6rem + 2vw, 4rem);
+}
+
+/* Additional fluid spacing utilities */
+.spacing-fluid-xs {
+  margin: clamp(0.125rem, 0.1rem + 0.1vw, 0.25rem);
+  padding: clamp(0.125rem, 0.1rem + 0.1vw, 0.25rem);
+}
+
+.spacing-fluid-sm {
+  margin: clamp(0.375rem, 0.3rem + 0.35vw, 0.75rem);
+  padding: clamp(0.375rem, 0.3rem + 0.35vw, 0.75rem);
+}
+
+.spacing-fluid-lg {
+  margin: clamp(2.5rem, 2rem + 2.5vw, 5rem);
+  padding: clamp(2.5rem, 2rem + 2.5vw, 5rem);
+}
+
+.spacing-fluid-xl {
+  margin: clamp(3.5rem, 3rem + 3vw, 6rem);
+  padding: clamp(3.5rem, 3rem + 3vw, 6rem);
+}
+
+/* Custom styles for bottom navigation */
+.bottom-nav-button {
+  @apply flex flex-col items-center justify-center py-2 transition-all duration-500 ease-out rounded-xl;
+  min-height: 52px;
+  min-width: 60px;
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+.bottom-nav-button:not(.active):hover {
+  @apply bg-[#076653]/10 text-[#076653] dark:text-white;
+  transform: translateY(-2px) translateZ(0);
+  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.bottom-nav-button.active {
+  @apply text-[#076653] dark:text-white;
+  background: transparent;
+  transform: translateZ(0);
+}
+
+.bottom-nav-icon-container {
+  @apply p-1 rounded-lg transition-all duration-500 ease-out;
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+.bottom-nav-button:not(.active):hover .bottom-nav-icon-container {
+  transform: scale(1.1) translateZ(0);
+  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.bottom-nav-button.active .bottom-nav-icon-container {
+  @apply bg-[#076653]/10 dark:bg-[#076653]/20;
+  transform: scale(1.05) translateZ(0);
+}
+
+.bottom-nav-icon {
+  @apply stroke-current transition-all duration-500 ease-out;
+  stroke-width: 1.5;
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+.bottom-nav-button:not(.active):hover .bottom-nav-icon {
+  transform: scale(1.05) translateZ(0);
+  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.bottom-nav-button.active .bottom-nav-icon {
+  @apply fill-[#076653] dark:fill-white stroke-[#076653] dark:stroke-white;
+  stroke-width: 1.5;
+}
+
+.bottom-nav-label {
+  @apply text-[10px] mt-1 transition-all duration-500 ease-out font-medium;
+  transform: translateZ(0);
+  will-change: opacity, transform;
+}
+
+.bottom-nav-button.active .bottom-nav-label {
+  @apply opacity-100 font-semibold;
+}
+
+.bottom-nav-button:not(.active) .bottom-nav-label {
+  @apply opacity-60;
+}
+
+.bottom-nav-button:not(.active):hover .bottom-nav-label {
+  @apply opacity-100;
+  transform: translateY(-1px) translateZ(0);
+  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* Mobile-specific utilities for native app feel */
+.safe-area-inset-top {
+  padding-top: env(safe-area-inset-top);
+}
+
+.safe-area-inset-bottom {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.safe-area-inset-left {
+  padding-left: env(safe-area-inset-left);
+}
+
+.safe-area-inset-right {
+  padding-right: env(safe-area-inset-right);
+}
+
+/* Enhanced safe area handling for different device orientations */
+@media (orientation: landscape) {
+  .safe-area-inset-left {
+    padding-left: max(env(safe-area-inset-left), 44px);
+  }
+  
+  .safe-area-inset-right {
+    padding-right: max(env(safe-area-inset-right), 44px);
+  }
+}
+
+/* Responsive padding for mobile */
+.p-responsive {
+  @apply px-4 py-4;
+}
+
+/* Reduced padding for mobile screens for better space utilization */
+.p-responsive-mobile-condensed {
+  @apply px-2 py-4;
+}
+
+@screen sm {
+  .p-responsive {
+    @apply px-6 py-5;
+  }
+  
+  .p-responsive-mobile-condensed {
+    @apply px-4 py-5;
+  }
+}
+
+@screen md {
+  .p-responsive {
+    @apply px-8 py-6;
+  }
+  
+  .p-responsive-mobile-condensed {
+    @apply px-6 py-6;
+  }
+}
+
+/* Touch targets for mobile - Enhanced for better accessibility */
+.touch-target {
+  min-height: 44px;
+  min-width: 44px;
+  /* Add touch ripple effect */
+  position: relative;
+  overflow: hidden;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+}
+
+.touch-target-large {
+  min-height: 56px;
+  min-width: 56px;
+  /* Add touch ripple effect */
+  position: relative;
+  overflow: hidden;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+}
+
+/* Touch ripple effect for buttons */
+.touch-target::after,
+.touch-target-large::after {
+  content: '';
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  background-image: radial-gradient(circle, #000 10%, transparent 10.01%);
+  background-repeat: no-repeat;
+  background-position: 50%;
+  transform: scale(10, 10);
+  opacity: 0;
+  transition: transform .3s, opacity .5s;
+}
+
+.touch-target:active::after,
+.touch-target-large:active::after {
+  transform: scale(0, 0);
+  opacity: .1;
+  transition: 0s;
+}
+
+/* Smooth scrolling for mobile */
+.smooth-scroll {
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Mobile card styles - Enhanced with better shadows and transitions */
+.card-mobile {
+  @apply bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-200/30 dark:border-gray-700/30 p-4 transition-all duration-300;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  will-change: transform;
+}
+
+.card-mobile-hover:hover {
+  @apply shadow-md transform transition-transform duration-300 hover:-translate-y-0.5;
+}
+
+/* Mobile button styles - Enhanced with better feedback */
+.btn-mobile {
+  @apply py-3 px-4 rounded-xl font-medium transition-all duration-300 flex items-center justify-center;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  will-change: transform;
+}
+
+.btn-mobile:active {
+  transform: scale(0.98);
+  -webkit-transform: scale(0.98);
+  transition: transform 0.1s ease;
+}
+
+.btn-mobile-primary {
+  @apply bg-gradient-to-r from-[#076653] to-teal-700 text-white shadow-md hover:shadow-lg;
+}
+
+.btn-mobile-secondary {
+  @apply bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-600;
+}
+
+/* Mobile input styles - Enhanced with better focus states */
+.input-mobile {
+  @apply w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl bg-gray-50 dark:bg-gray-700 focus:ring-2 focus:ring-primary-500 focus:border-transparent text-base;
+  transition: all 0.2s ease;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+}
+
+.input-mobile:focus {
+  box-shadow: 0 0 0 3px rgba(7, 102, 83, 0.2);
+  border-color: #076653;
+}
+
+.select-mobile {
+  @apply w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl bg-gray-50 dark:bg-gray-700 focus:ring-2 focus:ring-primary-500 focus:border-transparent text-base appearance-none;
+  transition: all 0.2s ease;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+}
+
+.select-mobile:focus {
+  box-shadow: 0 0 0 3px rgba(7, 102, 83, 0.2);
+  border-color: #076653;
+}
+
+/* Mobile typography - Enhanced with better readability */
+.text-mobile-title {
+  @apply text-xl font-bold text-gray-900 dark:text-white;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+}
+
+.text-mobile-subtitle {
+  @apply text-lg font-semibold text-gray-800 dark:text-gray-200;
+  line-height: 1.4;
+}
+
+.text-mobile-body {
+  @apply text-base text-gray-700 dark:text-gray-300;
+  line-height: 1.5;
+}
+
+.text-mobile-caption {
+  @apply text-sm text-gray-500 dark:text-gray-400;
+  line-height: 1.4;
+}
+
+/* Mobile list items - Enhanced with better touch feedback */
+.list-item-mobile {
+  @apply flex items-center justify-between py-3 px-4 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700/50 transition-colors duration-200;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+}
+
+.list-item-mobile:active {
+  background-color: rgba(7, 102, 83, 0.1);
+}
+
+/* Mobile dividers */
+.divider-mobile {
+  @apply h-px bg-gray-200 dark:bg-gray-700 my-2;
+}
+
+/* Mobile floating elements - Enhanced with better shadows */
+.floating-element {
+  @apply rounded-2xl shadow-lg border border-gray-200/30 dark:border-gray-700/30 backdrop-blur-xl;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+}
+
+/* Hide scrollbars on mobile devices */
+.mobile-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbars for Firefox */
+.mobile-scrollbar {
+  scrollbar-width: none;
+}
+
+/* Native-like scrollbars for desktop */
+.desktop-scrollbar::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.desktop-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.desktop-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(7, 102, 83, 0.3);
+  border-radius: 3px;
+}
+
+.desktop-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(7, 102, 83, 0.5);
+}
+
+/* Prevent text selection on buttons for better mobile UX */
+.touch-target,
+.touch-target-large,
+.btn-mobile {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Better tap highlight color for mobile */
+* {
+  -webkit-tap-highlight-color: rgba(7, 102, 83, 0.2);
+}
+
+/* Print styles */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  
+  body {
+    background-color: white !important;
+    color: black !important;
+  }
+  
+  .card {
+    box-shadow: none !important;
+    border: 1px solid #ccc !important;
+  }
+}
+
+/* iOS Safari specific fixes */
+@supports (-webkit-touch-callout: none) {
+  /* Prevent elastic scrolling on iOS */
+  .ios-prevent-elastic-scroll {
+    position: fixed;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+  }
+  
+  /* Fix for input zooming on iOS */
+  input, textarea, select {
+    font-size: 16px;
+  }
+  
+  @media screen and (min-width: 768px) {
+    input, textarea, select {
+      font-size: initial;
+    }
+  }
+}
+
+/* Enhanced dark mode styles for better visual hierarchy */
+
