@@ -1,0 +1,75 @@
+/* Custom styles for More.jsx to avoid Tailwind CSS opacity syntax issues */
+.more-gradient-header {
+  background: linear-gradient(to right, rgba(7, 102, 83, 0.1), rgba(7, 102, 83, 0.05));
+  border: 1px solid rgba(7, 102, 83, 0.2);
+}
+
+.dark .more-gradient-header {
+  border-color: rgba(7, 102, 83, 0.1);
+}
+
+.more-info-note {
+  background: linear-gradient(135deg, rgba(156, 163, 175, 0.1) 0%, rgba(219, 234, 254, 0.3) 100%);
+  border: 1px solid rgba(147, 197, 253, 0.5);
+}
+
+.dark .more-info-note {
+  background: linear-gradient(135deg, rgba(30, 58, 138, 0.3) 0%, rgba(30, 64, 175, 0.2) 100%);
+  border-color: rgba(29, 78, 216, 0.3);
+}
+
+.more-category-card {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.4) 0%, rgba(243, 244, 246, 0.4) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.dark .more-category-card {
+  background: linear-gradient(135deg, rgba(31, 41, 55, 0.4) 0%, rgba(17, 24, 39, 0.4) 100%);
+  border-color: rgba(55, 65, 81, 0.5);
+}
+
+.more-item-button {
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.dark .more-item-button {
+  background: rgba(31, 41, 55, 0.2);
+  border-color: rgba(55, 65, 81, 0.3);
+}
+
+.more-item-button:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.dark .more-item-button:hover {
+  background: rgba(31, 41, 55, 0.3);
+}
+
+.more-item-hover-glow {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, transparent 100%);
+}
+
+.more-item-icon-bg {
+  background: linear-gradient(135deg, rgba(7, 102, 83, 0.2) 0%, rgba(7, 102, 83, 0.1) 100%);
+}
+
+.more-category-icon-bg {
+  background: rgba(7, 102, 83, 0.1);
+}
+
+.more-category-border {
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.dark .more-category-border {
+  border-color: rgba(55, 65, 81, 0.3);
+}
+
+.more-item-border {
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.more-decorative-element {
+  background: rgba(7, 102, 83, 0.05);
+}

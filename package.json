@@ -45,6 +45,7 @@
     "@stianlarsen/border-beam": "^1.0.11",
     "@supabase/supabase-js": "^2.81.1",
     "@tanstack/react-query": "^5.83.0",
+    "@vitejs/plugin-react-swc": "^4.2.2",
     "chart.js": "^4.4.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
